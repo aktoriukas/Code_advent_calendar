@@ -1,6 +1,5 @@
 const data = 
-`
-bahmtpujokxdqlyi
+`bahmtpujokxdqlyi
 efqksvrctzhmngw
 
 zfyhxoeuljmp
@@ -2231,29 +2230,65 @@ fcqgwnh
 qpgfkhbc
 
 qesdpalbnfjyrzhim
-xocesfutkghymvb
-`
+xocesfutkghymvb`
 
 let group = data.split('\n\n')
 let totalYes = 0;
+let totalAllYes = 0;
 
 group.forEach(function (groupData, index) {
 
     let dataArray = [];
+    let localCount = 0;
+    let localTotalYes = 0;
 
-    groupData = groupData.replace(/\n/g, '')
+    // groupData = groupData.replace(/\n/g, '')
+
     console.log(`===================`)
     console.log(`data: ${groupData}`)
-    for (i = 0; i < groupData.length; i++) {
-        dataArray.push(groupData[i])
-    }
-    console.log(dataArray)
+    groupData = groupData.split('\n')
+    console.log(groupData)
 
-    dataArray = [...new Set(dataArray)]
-    console.log(dataArray)
-    console.log(dataArray.length)
-    totalYes += dataArray.length
+    for (let i = 0; i < groupData[0].length; i++) {
+
+        // if ( groupData.length == 1) {
+        //     let exeption = groupData[0].length
+        //     totalAllYes = totalAllYes + exeption;
+        //     localTotalYes = localTotalYes + exeption;
+        //     console.log(`HERE <----------------------`)
+        //     console.log(`exeption: ${exeption}`)
+        //     break
+        // }
+        let x = 1;
+
+        for (let o = 1; o < groupData.length; o++) {
+
+
+            for (let p = 0; p < groupData[o].length; p++) {
+                if (groupData[o][p] == groupData[0][i]) {
+                    x++;
+                    continue
+                }
+            }
+        }
+        console.log(x)
+        if (x == groupData.length) {
+             totalAllYes++
+             localTotalYes++
+        }
+    }
+    console.log(`local total Yes ${localTotalYes}`)
+    console.log(`global total Yes ${totalAllYes}`)
+
+    // for (i = 0; i < groupData.length; i++) {
+    //     dataArray.push(groupData[i])
+    // }
+    // dataArray = [...new Set(dataArray)]
+    // console.log(dataArray)
+    // console.log(dataArray.length)
+    // totalYes += dataArray.length
 })
-console.log(totalYes)
+console.log(totalAllYes)
 
 // PART 1 6662
+// PART 2 3382
