@@ -623,6 +623,8 @@ function checkForLoop(i) {
 }
 
 function runCode (newinstructionArray) {
+    pastInstructions = [];
+
     for (let i = 0; i < newinstructionArray.length; i) {
 
         let instruction, operationIn, argument;
@@ -660,7 +662,7 @@ for (let i = 0; i < instructionsArray.length; i++) {
 
     instruction = instructionsArray[i].split(' ');
     let operation = instruction[0];
-    let newinstructionArray = instructionsArray;
+    let newinstructionArray = [...instructionsArray];
     console.log(`-------------------------------------`)
     console.log(`before change: ${instructionsArray[i]}`)
 
@@ -674,7 +676,8 @@ for (let i = 0; i < instructionsArray.length; i++) {
             console.log(`No loop: ${accumulator}`);
             break
         }     
-    }else if (operation == 'jmp') {
+    }
+    if (operation == 'jmp') {
         newinstructionArray[i] = instructionsArray[i].replace('jmp', 'nop')
         console.log(`after change: ${newinstructionArray[i]}`)
 
@@ -691,4 +694,4 @@ for (let i = 0; i < instructionsArray.length; i++) {
 // console.log(`accumulator before loop: ${accumulator}`);
 
 // PART 1 1217
-// PART 2 NOT 0, 1210(too high)
+// PART 2 501
