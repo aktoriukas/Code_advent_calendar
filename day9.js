@@ -1062,6 +1062,20 @@ for (let currentIndex = 25; currentIndex < numbersArray.length; currentIndex++) 
 }
 console.log(part2Result)
 
+let lowest = 1398413738;
+let highest = 0;
+
+part2Result.forEach(function (item, index) {
+
+    item = parseInt(item)
+
+    if (item > highest) { highest = item}
+    if( item < lowest) { lowest = item }
+})
+console.log(`highest: ${highest}`)
+console.log(`lowest: ${lowest}`)
+console.log(`sum: ${highest + lowest}`)
+
 
 
 // PART 1 1398413738
