@@ -93,32 +93,76 @@ const data =
 9
 78`
 
-const dataArray = data.split('\n');
+let dataArray = data.split('\n');
 let current = 0;
 let plus1 = 0;
 let plus2 = 0;
 let plus3 = 0;
+let totalWays = 0;
 
-
-dataArray.sort(function(a,b) { return a - b})
+dataArray = dataArray.sort((a,b) => a-b).map((x) => Number(x))
 
 dataArray.forEach( function ( number, index) {
     
     let n = parseInt(number)
-    if ( n - current == 1) { plus1++; console.log(`+1`) }
-    if ( n - current == 2) { plus2++ }
-    if ( n - current == 3) { plus3++; console.log(`+3`) }
-    console.log(`${n} current: ${current}`)
-    console.log(`+1 : ${plus1}`)
-    console.log(`+3 : ${plus3}`)
+    if ( n - current == 1) { 
+        plus1++; console.log(`+1`) 
+        totalWays++;
+    }
+    if ( n - current == 2) { 
+        plus2++ 
+        totalWays++;
+    }
+    if ( n - current == 3) { 
+        plus3++; console.log(`+3`) 
+        totalWays++;
+    }
 
     current = n;
     console.log(`-----------------------`)
 })
 
-console.log(`+1 : ${plus1}`)
-console.log(`+2 : ${plus2}`)
-console.log(`+3 : ${plus3}`)
-console.log(`answer: ${plus1 * (plus3 +1)}`)
+dataArray.unshift(0);
+
+let ways = dataArray.map((x,y) => (y == 0 ? 1 : 0))
+
+for ( let i = 0; i < ways.length; i++) {
+
+    for ( let j = i-3; j < i; j++) {
+
+        if (dataArray[i] <= dataArray +3) {
+            ways[i] += ways[j];
+        }
+    }
+}
+// -----------------------------------------------------------------------------
+
+let lines = data.split("\n");
+
+let adapters = lines.sort((a, b) => a - b).map((x) => Number(x));
+
+adapters.unshift(0);
+
+ways = adapters.map((x, i) => (i == 0 ? 1 : 0));
+
+for (let i = 0; i < ways.length; i++) {
+  for (let j = i - 3; j < i; j++) {
+    if (adapters[i] <= adapters[j] + 3) {
+      ways[i] += ways[j];
+    }
+  }
+}
+console.log(ways[0])
+
+console.log("Ways to arrange adapters:", ways[ways.length - 1]);
+
+// -----------------------------------------------------------------------------
+
+// console.log(`+1 : ${plus1}`)
+// console.log(`+2 : ${plus2}`)
+// console.log(`+3 : ${plus3}`)
+console.log(`answer nr.1: ${plus1 * (plus3 +1)}`)
+console.log(`answer nr.2 ${ways[ways.length - 1]}`)
 
 // PART 1 1920
+// PART 2 1511207993344
