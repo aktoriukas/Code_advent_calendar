@@ -1079,4 +1079,4 @@ console.log(`sum: ${highest + lowest}`)
 
 
 // PART 1 1398413738
-// PART 2 not : 178957314 (too high), 152136112 (too low)
+// PART 2 169521051
