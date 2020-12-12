@@ -798,62 +798,179 @@ let location = {
     east: 0,
     west: 0,
     south: 0,
+    waypoint: {
+        north: 1,
+        east: 10,
+        west: -10,
+        south: -1
+    },
+    //PART 1
+    // moveForward: function() {
+    //     switch (this.facingDirection) {
+    //         case 'E':
+    //             this.moveEast();
+    //             break
+    //         case 'S':
+    //             this.moveSouth();
+    //             break
+    //         case 'W':
+    //             this.moveWest();
+    //             break
+    //         case 'N':
+    //             this.moveNorth();
+    //             break
+    //     }
+    // },
     moveForward: function() {
-        switch (this.facingDirection) {
-            case 'E':
-                this.moveEast();
-                break
-            case 'S':
-                this.moveSouth();
-                break
-            case 'W':
-                this.moveWest();
-                break
-            case 'N':
-                this.moveNorth();
-                break
+        
+        let n, e, w, s;
+        n = this.number * this.waypoint.north;
+        e = this.number * this.waypoint.east;
+        s = this.number * this.waypoint.south;
+        w = this.number * this.waypoint.west;
+
+        if ( n > 0) { 
+            this.north += n;
+            this.south -= n;
+        }
+        if ( e > 0) { 
+            this.east += e;
+            this.west -= e
+        }
+        if ( s > 0) { 
+            this.south += s;
+            this.north -= s;
+        }
+        if ( w > 0) { 
+            this.west += w;
+            this.east -= w;
         }
     },
+    turnRight() {
+        let n, e, w, s;
+        e = this.waypoint.north;
+        s = this.waypoint.east;
+        w = this.waypoint.south;
+        n = this.waypoint.west;
+
+        this.waypoint.north = n;
+        this.waypoint.east = e;
+        this.waypoint.south = s;
+        this.waypoint.west = w;
+    },
+    turnLeft() {
+        let n, e, w, s;
+        w = this.waypoint.north;
+        n = this.waypoint.east;
+        e = this.waypoint.south;
+        s = this.waypoint.west;
+
+        this.waypoint.north = n;
+        this.waypoint.east = e;
+        this.waypoint.south = s;
+        this.waypoint.west = w;
+    },
+    turnAround() {
+        let n, e, w, s;
+
+        s = this.waypoint.north;
+        w = this.waypoint.east;
+        n = this.waypoint.south;
+        e = this.waypoint.west;
+
+        this.waypoint.north = n;
+        this.waypoint.east = e;
+        this.waypoint.south = s;
+        this.waypoint.west = w;
+
+    },
+    //PART 1
+    // changeDirection: function() {
+    //     let newDirection
+    //     if ( this.case == 'R') {
+    //         newDirection = (this.facingDirectionDeg + this.number) % 360;
+    //     } else if ( this.case == 'L') {
+    //         newDirection = ((this.facingDirectionDeg - this.number) + 360) % 360;
+    //     }
+    //     switch (newDirection) {
+    //         case 0:
+    //             this.facingDirection = 'N'
+    //             break
+    //         case 90:
+    //             this.facingDirection = 'E'
+    //             break
+    //         case 180:
+    //             this.facingDirection = 'S'
+    //             break
+    //         case 270:
+    //             this.facingDirection = 'W'
+    //             break
+    //     }
+    //     this.facingDirectionDeg = newDirection;
+    // },
     changeDirection: function() {
         let newDirection
-        if ( this.case == 'R') {
-            newDirection = (this.facingDirectionDeg + this.number) % 360;
-        } else if ( this.case == 'L') {
-            newDirection = ((this.facingDirectionDeg - this.number) + 360) % 360;
-        }
-        switch (newDirection) {
-            case 0:
-                this.facingDirection = 'N'
-                break
+        switch (this.number) {
             case 90:
-                this.facingDirection = 'E'
+                if ( this.case == 'R') {
+                    this.turnRight();
+                } else if ( this.case == 'L') {
+                    this.turnLeft();
+                }        
                 break
             case 180:
-                this.facingDirection = 'S'
+                this.turnAround();
                 break
             case 270:
-                this.facingDirection = 'W'
+                if ( this.case == 'R') {
+                    this.turnRight();
+                    this.turnRight();
+                    this.turnRight();
+
+                } else if ( this.case == 'L') {
+                    this.turnLeft();
+                    this.turnLeft();
+                    this.turnLeft();
+                }        
                 break
         }
         this.facingDirectionDeg = newDirection;
     },
+
+    // PART 1
+    // moveEast: function() {
+    //     this.east += this.number;
+    //     this.west -= this.number
+    // },
+    // moveWest: function() {
+    //     this.west += this.number;
+    //     this.east -= this.number;
+    // },
+    // moveNorth: function() {
+    //     this.north += this.number;
+    //     this.south -= this.number;
+    // },
+    // moveSouth: function() {
+    //     this.south += this.number;
+    //     this.north -= this.number;
+    // }
+
     moveEast: function() {
-        this.east += this.number;
-        this.west -= this.number
+        this.waypoint.east += this.number;
+        this.waypoint.west -= this.number
     },
     moveWest: function() {
-        this.west += this.number;
-        this.east -= this.number;
+        this.waypoint.west += this.number;
+        this.waypoint.east -= this.number;
     },
     moveNorth: function() {
-        this.north += this.number;
-        this.south -= this.number;
+        this.waypoint.north += this.number;
+        this.waypoint.south -= this.number;
     },
     moveSouth: function() {
-        this.south += this.number;
-        this.north -= this.number;
+        this.waypoint.south += this.number;
+        this.waypoint.north -= this.number;
     }
-
 }
 
 const coordinates = data.split('\n');
@@ -893,4 +1010,4 @@ coordinates.forEach(function ( direction, index) {
 })
 
 //PART 1 1589
-//PART 2
+//PART 2 23960
