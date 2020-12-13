@@ -42,27 +42,27 @@ for (let i = 0; i < validBusses.length; i++) {
 }
 let fastestBus = findFirstBus();
 
-while (sorted !== true) {
-    validBusses[0].t += validBusses[0].interval;
-    checkArray = [];
+// while (sorted !== true) {
+//     validBusses[0].t += validBusses[0].interval;
+//     checkArray = [];
 
-    for ( let i = 1; i < validBusses.length; i ++) {
-        validBusses[i].t = 0;
-        while ( validBusses[i].t + validBusses[i].gap < validBusses[0].t){
-            validBusses[i].t += validBusses[i].interval
-        }
-    }
-    for (let i = 1; i < validBusses.length; i++) {
-        if (validBusses[i].t == validBusses[i-1].t + validBusses[i].gap) {
-            checkArray.push(true)
-        } else {
-            checkArray.push(false)
-        }
-    }
-    if ( checkArray.indexOf(false) == -1) {
-        sorted = true
-    }
-}
+//     for ( let i = 1; i < validBusses.length; i ++) {
+//         validBusses[i].t = 0;
+//         while ( validBusses[i].t + validBusses[i].gap < validBusses[0].t){
+//             validBusses[i].t += validBusses[i].interval
+//         }
+//     }
+//     for (let i = 1; i < validBusses.length; i++) {
+//         if (validBusses[i].t == validBusses[i-1].t + validBusses[i].gap) {
+//             checkArray.push(true)
+//         } else {
+//             checkArray.push(false)
+//         }
+//     }
+//     if ( checkArray.indexOf(false) == -1) {
+//         sorted = true
+//     }
+// }
 
 console.log(validBusses)
 console.log(checkArray)
