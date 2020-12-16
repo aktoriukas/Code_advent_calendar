@@ -161,8 +161,10 @@ console.log("Ways to arrange adapters:", ways[ways.length - 1]);
 // console.log(`+1 : ${plus1}`)
 // console.log(`+2 : ${plus2}`)
 // console.log(`+3 : ${plus3}`)
+
 console.log(`answer nr.1: ${plus1 * (plus3 +1)}`)
 console.log(`answer nr.2 ${ways[ways.length - 1]}`)
+
 
 // PART 1 1920
 // PART 2 1511207993344
