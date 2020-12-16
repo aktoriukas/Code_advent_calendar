@@ -294,11 +294,9 @@ rules.forEach(rule => {
                 || number >= this.rule2.min && number <= this.rule2.max) {
                 valid = true;
             }
-
             return valid;
         }
     };
-    
 
     let dat = rule.split(':')[1].split('or')
 
@@ -309,36 +307,51 @@ rules.forEach(rule => {
     RuleObj.rule2.min = Number(dat[1].split('-')[0].slice(1, 4))
     RuleObj.rule2.max = Number(dat[1].split('-')[1].slice(0, 3))
     RulesArr.push(RuleObj);
-
 });
-console.log(RulesArr)
-console.log(RulesArr[0].checkValidation(615))
-console.log(RulesArr[0])
+
 
 tickets = tickets.split('\n');
+console.log(`tickets: ${tickets.length}`)
+
 tickets.shift()
-console.log(tickets)
-tickets.forEach(tick => {
+tickets.forEach((tick, index) => {
     numbers = [];
     numbers = tick.split(',');
+    let val = true;
 
     numbers.forEach(number => {
-
         let validation = false
 
         for (let i = 0; i < RulesArr.length; i++) {
             if (RulesArr[i].checkValidation(number) === true) {
                 validation = true;
+                val = false;
                 break;
             }
         }
         if ( validation === false) { notValidNumbers.push(number) }
     });
+
+    // if ( val === false) {
+
+    //     for( var i = 0; i < tickets.length; i++){ 
+    
+    //         if ( tickets[i] == numbers) { 
+        
+    //             tickets.splice(i, 1); 
+    //         }
+    //     }
+    // }
 });
+// Calculate part.1
 let part1 = 0;
 notValidNumbers.forEach(num => {
     part1 += Number(num)
 });
+
+// Calculate part.2
+console.log(tickets.length)
+
 console.log(`Part 1 answer: ${part1}`)
 
 // PART 1 28882
