@@ -332,16 +332,6 @@ tickets.forEach((tick, index) => {
         if ( validation === false) { notValidNumbers.push(number) }
     });
 
-    // if ( val === false) {
-
-    //     for( var i = 0; i < tickets.length; i++){ 
-    
-    //         if ( tickets[i] == numbers) { 
-        
-    //             tickets.splice(i, 1); 
-    //         }
-    //     }
-    // }
 });
 // Calculate part.1
 let part1 = 0;
