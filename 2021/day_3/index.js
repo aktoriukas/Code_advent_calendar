@@ -37,3 +37,80 @@ const gammaNr = binaryToDecimal(gamma)
 const epsilonNr = binaryToDecimal(epsilon)
 
 console.log("answer nr1", gammaNr * epsilonNr)
+
+// Part 2
+
+const calculateOxygen = () => {
+
+    let currentArray = [...dataArray]
+    let array0 = []
+    let array1 = []
+    let i = 0
+
+    while(currentArray.length > 1) {
+
+        currentArray.forEach(item => {
+            if(item[i] === '0'){
+                array0.push(item)
+            }else{
+                array1.push(item)
+            }
+        })
+    
+        if(array0.length > array1.length){
+            currentArray = array0
+        }
+        else if(array1.length > array0.length){
+            currentArray = array1
+        }
+        else{
+            currentArray = array1
+        }
+
+        array0 = []
+        array1 = []
+        i++
+    }
+    return currentArray
+}
+
+const calculateO2 = () => {
+    let currentArray = [...dataArray]
+    let array0 = []
+    let array1 = []
+    let i = 0
+
+    while(currentArray.length > 1) {
+
+        currentArray.forEach(item => {
+            if(item[i] === '0'){
+                array0.push(item)
+            }else{
+                array1.push(item)
+            }
+        })
+    
+        if(array0.length < array1.length){
+            currentArray = array0
+        }
+        else if(array1.length < array0.length){
+            currentArray = array1
+        }
+        else{
+            currentArray = array0
+        }
+
+        array0 = []
+        array1 = []
+        i++
+    }
+    return currentArray
+}
+
+const oxygen = calculateOxygen()
+const o2 = calculateO2()
+
+const oxygenNr = binaryToDecimal(oxygen[0])
+const o2Nr = binaryToDecimal(o2[0])
+
+console.log("answer nr2", oxygenNr * o2Nr)
