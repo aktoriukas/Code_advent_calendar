@@ -1,3 +1,3 @@
-#  Advent of code 2020
+# Advent of code
 
-## Coding solutions from 2020 Christmas calendar.
+## Coding solutions from Christmas calendar.
