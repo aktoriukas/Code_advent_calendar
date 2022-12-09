@@ -69,5 +69,33 @@ for (let property in scructure) {
     scructure["totalSize"] += totalChildSize
   }
 }
-
 console.log("answer one", answerone)
+
+// Part 2
+
+const requiredSpace = 30000000
+const availibleSpace = 70000000 - scructure["totalSize"]
+const neededSpace = requiredSpace - availibleSpace
+let validDirs = []
+
+function checkForSpace(dir, property) {
+  if (dir["totalSize"] > neededSpace) validDirs.push({ name: property, size: dir["totalSize"] })
+
+  for (let property in dir) {
+    if (typeof dir[property] !== "number") checkForSpace(dir[property], property)
+  }
+}
+
+for (let property in scructure) {
+  if (typeof scructure[property] !== "number") {
+    checkForSpace(scructure[property], property)
+  }
+}
+
+if (scructure["totalSize"] > neededSpace) validDirs.push({ name: "/", size: scructure["totalSize"] })
+
+validDirs.sort((a, b) => {
+  return a.size - b.size
+})
+
+console.log("answer two", validDirs[0].size)
